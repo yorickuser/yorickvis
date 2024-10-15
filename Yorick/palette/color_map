@@ -1,0 +1,19 @@
+x= span(-3,3,64)(,-:1:64);
+ y= transpose(x);
+ z= 0.5*sin(3*sqrt(x^2+y^2)+0.2)*cos((x-y+sin(0.1)));
+ 
+
+plwf ,z,fill= char(z*0+245);
+
+243 white
+244 black
+245 gray
+246 yellow
+247 parple
+248 cyan
+249 blue
+250 green
+251 red
+252 white
+253 black
+

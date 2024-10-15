@@ -1,0 +1,30 @@
+#!/bin/bash
+#yorvis/yorvis output nlevs=10 nlevsl=5 idl_init_pause=1 mypal1=\"gg\" mypal2=\"heat\"
+
+
+yorickvis=~/Yorick
+yorickpath=$yorickvis/yorick
+
+if [ $# == 0 ];
+then
+    rlwrap -c $yorickpath/yorick/yorick
+else
+
+    echo file_base=\"$1\" > $yorickvis/tmp.i;
+    #
+    # echo $2 > $yorvispath/tmp1.i;
+    
+    #echo $ > $yorvispath/tmp1.i;
+    
+    for x in "${@:2:($#-1)}"
+    do
+	echo "$x" >> $yorickvis/tmp.i;
+    done
+    
+    ##echo file_data=\"$1\" > $yorvispath/tmp.i;
+    ##echo file_outcount=\"$2\" >> $yorvispath/tmp.i;
+    ##echo file_met=\"$3\" >> $yorvispath/tmp.i;
+    
+    rlwrap -c $yorickpath/yorick/yorick -i $yorickvis/yorickvisf.i
+
+fi

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+
+
+##find -name "frame*ps" | parallel -j 4 convert -density 300  -geometry 500x500 {} {}.png
+
+echo "converting ps to eps.."
+ls frame*.ps |  xargs -t -P 11 -I{} ps2epsi {} {}.eps
+
+echo "converting eps to png.."
+ls frame*.ps.eps | xargs -t -P 11 -I{} convert -density $1x$1 -geometry $2x$2 {} {}.png
+
+rm *.eps
+
+echo "converting png to png.."
+
+ls frame*.ps.eps.png | xargs -t -P 11 -I{} convert -bordercolor white -border 10x10 -background white -alpha remove -flatten -verbose {} {}
+
+echo "making movie.."
+
+ffmpeg -y -r 22 -i frame%05d.ps.eps.png -qscale 0 $3
