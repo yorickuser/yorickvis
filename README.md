@@ -2,10 +2,10 @@
 GUI tool for visualization and simlation controrol written in [Yorick language](https://github.com/LLNL/yorick)
 -------
 
-* Directory "Yorick" contains some additional functions for 2D- and 3D-plot and for event-driven control by mouse (function "idl").
+* Directory "Yorick" contains additional functions for 2D- and 3D-plot and for event-driven control by mouse (function "idl").
+* Some functions are the same with those in "myYorick" in [my yorick fork](https://github.com/yorickuser/yorick)
 * Currently, documents for "help, function_name" may be incomplete and source codes are not tidy, but most functions listed below have examples, shown by "help, function_name" at yorick prompt.
 * For examples of the evnt-driven control function, see [my yorick website](https://translate.google.co.jp/translate?sl=ja&tl=en&js=y&prev=_t&hl=ja&ie=UTF-8&u=http%3A%2F%2Fbeetle.starfree.jp%2Fyorick%2Fyorick_basic_idl.html&edit-text=&act=url) (translated from japanese to english by google translation)
-
 
 
 Usage
