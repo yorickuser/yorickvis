@@ -460,6 +460,7 @@ flip_y=1;
 flag_lcon=1;
 flag_lcon31=1;
 start=0;
+loadhorn=0;
 
 
 power=0.58;
@@ -502,13 +503,9 @@ idl_menu_fun56=swrite(format=" nlevsl:%d",nlevsl);
  
 //func viewh(file_base){
 //  extern metlen,xyz,file_outcount,file_data,file_met,f;
-  
- file_outcount=swrite(format="%s_outcount.dat",file_base);
-file_data=swrite(format="%s.dat",file_base);
-file_met=swrite(format="%s_met.dat",file_base);
 
 
- f=open(file_data,"r");
+
  n_nv=0;
  t=0;
  tcool=0;
@@ -517,24 +514,43 @@ file_met=swrite(format="%s_met.dat",file_base);
  idl_init=1;
  //idl_rotation=2;
  //idl_rotation_speed=[0,0,0.0];
- 
- window,0;
- animate,1;
 
-
+readcount=0;
+outcount=0;
 nn=0;
-read,f,nn;
+
+if(loadhorn==0){
+ file_outcount=swrite(format="%s_outcount.dat",file_base);
+file_data=swrite(format="%s.dat",file_base);
+file_met=swrite(format="%s_met.dat",file_base);
+  f=open(file_data,"r");
+
+  read,f,nn;
 xyz=array(0.0,3,nn,nn);
 met0=xyz;
 met=met0;
 
-readcount=0;
-outcount=0;
-setz3,z3_default;
-cage3,1;
-
 read_met,nn,met0,file_met;
 calc_met_max,met0,met,met_max,met_vec;
+
+ }
+
+if(loadhorn==1){
+ 
+  load_horn,file_base,plot=1;
+  limits,-0.25,0.25,-0.25,0.25;
+  setz3,z3_default;
+  ofront_left;
+ 
+
+ }
+
+ window,0;
+ animate,1;
+
+
+cage3,1;
+setz3,z3_default;
 
 window,1;
 fma;
@@ -547,6 +563,8 @@ window,0;
 
 
 done_vind=0;
+
+if(loadhorn==0){
 while(1){
   
   g=open(file_outcount,"r");
@@ -627,6 +645,12 @@ if(readcount==start)break;
 animate,0;
 close,f;
 
-//}
+}
+
+if(loadhorn==1){
+  light3, ambient=0.2,diffuse=0.8, specular=0.9, sdir=[3,3,1],spower=3;  
+  viewr;
+ }
 
 //viewh,file_base;
+
