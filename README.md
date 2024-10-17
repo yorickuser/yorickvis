@@ -1,5 +1,5 @@
 -------
-GUI tool for visualization and simlation controrol written in [Yorick language](https://github.com/LLNL/yorick)
+Toolkit for GUI simlation controrol and visualization written in [Yorick language](https://github.com/LLNL/yorick)
 -------
 
 * Directory "Yorick" contains additional functions for 2D- and 3D-plot and for event-driven control by mouse (function "idl"). Some functions are the same with those in "myYorick" in [my yorick fork](https://github.com/yorickuser/yorick)
