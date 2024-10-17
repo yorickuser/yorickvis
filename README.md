@@ -13,10 +13,12 @@ rlwrap
 Usage
 -------
 
-* At yorickvis/ execute ./install.sh, which automatically get yorick-2.2.04 and compile it, and then make a simbolic link "Yorick" at your home directory.
 * Type "~/Yorick/yorickvis" for starting yorick with yorickvis functions.
-* Type "~/Yorick/yorickvis  ~/Yorick/idl_demo1.i" for running "idl_demo1.i" directory
+
+* Type "~/Yorick/yorickvis  ~/Yorick/idl_demo1.i" for executing "idl_demo1.i" quickly
+
 * Type "~/Yorick/yorickvisf datafile" for visualization of ongoing simulation.
+
 * Type "help,function_name" at yorick prompt show its example.
 
 Functions in idl.i
