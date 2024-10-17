@@ -13,13 +13,13 @@ rlwrap
 Usage
 -------
 
-* ~/Yorick/yorickvis　　
+* ~/Yorick/yorickvis  
   starts yorick with yorickvis functions.
 
-* ~/Yorick/yorickvis  ~/Yorick/idl_demo1.i　　
+* ~/Yorick/yorickvis  ~/Yorick/idl_demo1.i  
   executes "idl_demo1.i" quickly
 
-* ~/Yorick/yorickvisf datafilename　　
+* ~/Yorick/yorickvisf datafilename  
   visualize an ongoing simulation.
 
 * help, functionname　　
