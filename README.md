@@ -22,7 +22,7 @@ Usage
 * ~/Yorick/yorickvisf datafilename  
   visualize an ongoing simulation.
 
-* help, functionname　　
+* help, functionname  
   at yorick prompt shows its explanation and example.
 
 
