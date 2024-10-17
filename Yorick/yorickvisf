@@ -10,11 +10,11 @@ then
     rlwrap -c $yorickpath/yorick/yorick
 else
 
-    #echo file_base=\"$1\" > $yorickvis/tmp.i;
+    echo file_base=\"$1\" > $yorickvis/tmp.i;
     #
     # echo $2 > $yorvispath/tmp1.i;
     
-    echo "" > $yorickvis/tmp.i;
+    #echo $ > $yorvispath/tmp1.i;
     
     for x in "${@:2:($#-1)}"
     do
@@ -25,6 +25,6 @@ else
     ##echo file_outcount=\"$2\" >> $yorvispath/tmp.i;
     ##echo file_met=\"$3\" >> $yorvispath/tmp.i;
     
-    rlwrap -c $yorickpath/yorick/yorick -i $yorickvis/tmp.i -i $1
+    rlwrap -c $yorickpath/yorick/yorick -i $yorickvis/yorickvisf.i
 
 fi

@@ -62,7 +62,7 @@ idl_map=[["1_click","zoom_in"],
 
 
 idl_map_menu=[["pause","end"],//1
-              ["change_pal-","change_pal+"],//3
+              ["change_pal+","change_pal-"],//3
               ["axis","rot_stop"],//5
               ["zoom_in","zoom_out"],//7
               ["reset","cage"],//8
@@ -510,7 +510,8 @@ func idl_zoom(amp,x,li,offset=){
 
  
 pals=["mine","earth","heat","sunrise","cr","sun","bb","rr","gg","cool","gray","br","by","blue","koge","wine","te","yb","silver","earth2","gray2","cale","rg2","gr2","bg2","bb_rev","purple"];
-idl_pal_id=0;
+idl_pal_id=1;
+
 func idl_change_pal(add_id){
   extern idl_pal_id,pals;
   
@@ -526,8 +527,9 @@ func idl_init_pal(void){
  local r,g,b;
  palette,r,g,b,query=1;
  make_palette,Y_DIR+"palette/mine.gp",r,g,b;
-  idl_pal_id=1;
-  pal,pals(1);
+ //idl_pal_id=1;
+ //pal,pals(1);
+ pal,pals(idl_pal_id);
 
  
 }

@@ -10,15 +10,15 @@ func function2(void){
   write,"Contours are decreased to:",nlevs;
 }
 
-nlevs=10;
+if(is_void(nlevs))nlevs=10;
 
 func idl_demo1(dp){
 if(is_void(dp))dp=20;
-extern nlevs;
-x= span(-3,3,64)(,-:1:64);
-y= transpose(x);
-  z= sin(2*sqrt(x^2+y^2))+cos(x+y+0.13);
-  
+ extern nlevs;
+ x= span(-3,3,64)(,-:1:64);
+ y= transpose(x);
+ z= sin(2*sqrt(x^2+y^2))+cos(x+y+0.13);
+ 
   animate,1;
   
   for(t=0;t<=10000;t++){
