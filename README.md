@@ -11,8 +11,8 @@ rlwrap
 
 Install (local)
 -------
-At yorickvis/, type the following command
-*  ./install.sh  
+At yorickvis/, type the following command  
+./install.sh  
 This automatically gets yorick-2.2.04 and compile it, and then make a simbolic link "Yorick" of "yorickvis/Yorick" at your home directory.
 
 
