@@ -54,7 +54,20 @@ func read_met_mfem(nn,&met,filename){
   metcount=array(1,3,nn-1,nn-1);
   read,f,met_mfem;
   close,f;
+
+   met(,1:nn-1,1:nn-1)=met_mfem(,1,,);
+   mcount(,1:nn-1,1:nn-1)=metcount;
+   
+  met(,2:nn,1:nn-1)+=met_mfem(,2,,);
+  mcount(,2:nn,1:nn-1)+=metcount;
+
+    met(,2:nn,2:nn)+=met_mfem(,3,,);
+  mcount(,2:nn,2:nn)+=metcount;
+
+  met(,1:nn-1,2:nn)+=met_mfem(,4,,);
+  mcount(,1:nn-1,2:nn)+=metcount;
   
+  /*
   met(,1:nn-1,1:nn-1)=met_mfem(,3,,);
    mcount(,1:nn-1,1:nn-1)=metcount;
    
@@ -65,6 +78,7 @@ func read_met_mfem(nn,&met,filename){
   mcount(,1:nn-1,2:nn)+=metcount;
   met(,2:nn,2:nn)+=met_mfem(,2,,);
   mcount(,2:nn,2:nn)+=metcount;
+  */
   met=met/mcount;
   
 }
