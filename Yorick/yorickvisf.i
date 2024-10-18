@@ -49,14 +49,24 @@ func read_met0(&nn,&met,filename){
 func read_met_mfem(nn,&met,filename){
   f=open(filename,"r");
   met=array(0.0,3,nn,nn);
+  mcount=array(0,3,nn,nn);
   met_mfem=array(0.0,3,5,nn-1,nn-1);
+  metcount=array(1,3,nn-1,nn-1);
   read,f,met_mfem;
   close,f;
   
-  met(,1:nn-1,1:nn-1)=met_mfem(,1,,);
-  met(,2:nn,1:nn-1)=met_mfem(,2,,);
-  met(,1:nn-1,2:nn)=met_mfem(,3,,);
-  met(,2:nn,2:nn)=met_mfem(,1,,);
+  met(,1:nn-1,1:nn-1)=met_mfem(,3,,);
+   mcount(,1:nn-1,1:nn-1)=metcount;
+   
+  met(,2:nn,1:nn-1)+=met_mfem(,4,,);
+  mcount(,2:nn,1:nn-1)+=metcount;
+
+  met(,1:nn-1,2:nn)+=met_mfem(,1,,);
+  mcount(,1:nn-1,2:nn)+=metcount;
+  met(,2:nn,2:nn)+=met_mfem(,2,,);
+  mcount(,2:nn,2:nn)+=metcount;
+  met=met/mcount;
+  
 }
 
 
