@@ -508,7 +508,7 @@ if(open(param_file,"r",1))include,param_file;
 
 
 if(metric_mfem!=0)mfem=1;
-if(mfem=1)read_met=read_met_mfem;
+if(mfem==1)read_met=read_met_mfem;
 
 my_heat=make_mypal(mypal1);
 my_cool=make_mypal(mypal2);
@@ -560,7 +560,7 @@ file_data=swrite(format="%s.dat",file_base);
  }
 
  
- }
+ 
  f=open(file_data,"r");
 
   read,f,nn;
@@ -571,7 +571,7 @@ met=met0;
 
 read_met,nn,met0,file_met;
 calc_met_max,met0,met,met_max,met_vec;
- 
+ }
 
 
 if(loadhorn==1){
