@@ -36,15 +36,27 @@ label3=["x","y","z"];
 
 include,"lcontour3f.i";
 
-func read_met(&nn,&met,filename){
+
+func read_met0(&nn,&met,filename){
   nn=0;
   f=open(filename,"r");
   read,f,nn;
   met=array(0.0,3,nn,nn);
   read,f,met;
-  close,f;
+  close,f;  
+}
 
+func read_met_mfem(nn,&met,filename){
+  f=open(filename,"r");
+  met=array(0.0,3,nn,nn);
+  met_mfem=array(0.0,3,5,nn-1,nn-1);
+  read,f,met_mfem;
+  close,f;
   
+  met(,1:nn-1,1:nn-1)=met_mfem(,1,,);
+  met(,2:nn,1:nn-1)=met_mfem(,2,,);
+  met(,1:nn-1,2:nn)=met_mfem(,3,,);
+  met(,2:nn,2:nn)=met_mfem(,1,,);
 }
 
 
@@ -133,9 +145,10 @@ func show_disc2(nlevs=,every=,dir=,color_samp=,dir_amp=,dir_color=,power=,edge_S
  pal_min=char(my_heat*cminpal+my_cool*(1-cminpal));
  pal_max=char(my_heat*cmaxpal+my_cool*(1-cmaxpal));
 
- 
+
  //read_met,nn,met0,file_met;
 
+   
   calc_met_max,met0,met,met_max,met_vec;
 
   rr=2.0;
@@ -448,6 +461,9 @@ func load_horn(hfile,plot=){
   }
 }
 
+
+
+
 /*_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/*/
 /*_/_/_/_/_/_/_/_/_/_/ MAIN _/_/_/_/_/_/_/_/_/_/_/*/
 /*_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/*/
@@ -472,18 +488,28 @@ nlevs=10;
 nlevsl=20;
 cmaxpal=0.9;
 cminpal=0.0;
-//file_base="output"
-
+file_base="output"
+  metric_mfem=0;
+  
  idl_init_pause=1;
  idl_movie_eps=1;
  flag_init_orient3=1;
 
 
+mfem=0;
 mypal1="heat";
 mypal2="cool";
+read_met=read_met0;
+
+
+
 param_file=Y_DIR+"tmp.i";
 if(open(param_file,"r",1))include,param_file;
-   
+
+
+if(metric_mfem!=0)mfem=1;
+if(mfem=1)read_met=read_met_mfem;
+
 my_heat=make_mypal(mypal1);
 my_cool=make_mypal(mypal2);
 
@@ -522,18 +548,31 @@ nn=0;
 if(loadhorn==0){
  file_outcount=swrite(format="%s_outcount.dat",file_base);
 file_data=swrite(format="%s.dat",file_base);
-file_met=swrite(format="%s_met.dat",file_base);
-  f=open(file_data,"r");
+
+ if(mfem==1){
+   if(metric_mfem==1){
+     file_met=pathform(pathsplit(file_base,delim="/")(:-1),delim="/")+"/metric.dat"
+   }else{
+   file_met=metric_mfem;
+   }
+ }else{
+   file_met=swrite(format="%s_met.dat",file_base);
+ }
+
+ 
+ }
+ f=open(file_data,"r");
 
   read,f,nn;
 xyz=array(0.0,3,nn,nn);
 met0=xyz;
 met=met0;
 
+
 read_met,nn,met0,file_met;
 calc_met_max,met0,met,met_max,met_vec;
+ 
 
- }
 
 if(loadhorn==1){
  
@@ -591,6 +630,7 @@ while(1){
         }
         
         lev_orig=get_lev(met_max,lev,metlen,nlevs=nlevs,power=power,minlev=minlev0);
+
         make_xyz,metlen,xyz(2,,),xyz(1,,),nvmet,vvmet;
         
  
@@ -621,7 +661,11 @@ while(1){
     }
 
     if(flag_init_orient3==1){
+      if(mfem==1){
+        orient3;
+      }else{
       ofront_left;
+      }
       setz3,z3_default;
       flag_init_orient3=0;
       light3, ambient=0.2,diffuse=0.8, specular=0.9, sdir=[3,3,1],spower=3;
@@ -632,7 +676,11 @@ while(1){
 
  draw3,1;
     
-  if(readcount==1){limits;scale,0.5;}
+  if(readcount==1){
+    init_scale=0.5;
+    if(mfem==1)init_scale=0.8;
+    limits;scale,init_scale;
+  }
   //if(readcount==1){limits,-0.4,0.4,-0.4,0.4;}
    
   }
