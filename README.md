@@ -9,6 +9,8 @@ Requirement
 -------
 rlwrap
 
+(Under MacOS, XQuartz is also required)
+
 Install (local)
 -------
 At yorickvis/, type the following command  
