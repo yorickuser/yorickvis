@@ -7,9 +7,9 @@ Toolkit for GUI control and visualization for ongoing simulation, written in [Yo
 
 Requirement
 -------
-rlwrap
+Under Linux: rlwrap
 
-(Under MacOS, XQuartz is also required)
+Under MacOS:  rlwrap and XQuartz
 
 Install (local)
 -------
